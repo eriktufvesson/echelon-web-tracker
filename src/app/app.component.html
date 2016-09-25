@@ -1,3 +1,27 @@
-<h1>
-  {{title}}
-</h1>
+<div id="loading" *ngIf="!mapLoaded">
+  <img src="assets/ripple.svg" alt="Loading">
+</div>
+
+<div id="login" *ngIf="mapLoaded && !loggedIn">
+  <div id="login-form">
+    <h2>Welcome to Echelon!</h2>
+    <button id="fblogin" class="btn facebook" (click)="facebookLogin()">Sign in with Facebook</button>
+    <h4>or with email</h4>
+    <form>
+      <input type="email" placeholder="Email address" name="email" [(ngModel)]="email" />
+      <input type="password" placeholder="Secret password" name="password" [(ngModel)]="password" />
+      <button class="btn accent btn-block" (click)="login()">Sign in with email</button>
+      <button class="btn accent2 btn-block" (click)="register()">Register new user</button>
+    </form>
+  </div>
+</div>
+
+<div id="users" *ngIf="loggedIn && mapLoaded && visibleUsers.length">
+  <ul>
+    <li *ngFor="let user of visibleUsers" (click)="setCenter(user)">
+      {{user.firstName}} {{user.lastName}}
+    </li>
+  </ul>
+</div>
+
+<div id="map"></div>
