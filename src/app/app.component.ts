@@ -81,8 +81,7 @@ export class AppComponent {
           }
         }
         else {
-          user.marker =
-            this.addMarker(position, user.firstName + ' ' + user.lastName, '#03A9F4');
+          user.marker = this.addMarker(position, user.firstName + ' ' + user.lastName, '#03A9F4');
         }
       }
     });
@@ -131,6 +130,27 @@ export class AppComponent {
         else {
           this.visibleUsers[i].marker =
             this.addMarker(pos, this.visibleUsers[i].firstName + ' ' + this.visibleUsers[i].lastName, '#03A9F4');
+        }
+
+        // if (!this.visibleUsers[i].lineCoords) {
+        //   this.visibleUsers[i].lineCoords = [];
+        // }
+        // this.visibleUsers[i].lineCoords.push({
+        //   lat,
+        //   lon
+        // });
+        if (!this.visibleUsers[i].polyline) {
+          this.visibleUsers[i].polyline = new google.maps.Polyline({
+            strokeColor: '#03A9F4',
+            strokeOpacity: 0.9,
+            strokeWeight: 5,
+            path: [pos]
+          });
+          this.visibleUsers[i].polyline.setMap(this.map);
+        }
+        else {
+          let path = this.visibleUsers[i].polyline.getPath();
+          path.push(pos);
         }
 
         break;
