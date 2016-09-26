@@ -106,6 +106,10 @@ export class AppComponent {
       if (this.visibleUsers[i].marker) {
         this.visibleUsers[i].marker.setMap(null);
       }
+      //Remove line if user has one
+      if (this.visibleUsers[i].polyline) {
+        this.visibleUsers[i].polyline.setMap(null);
+      }
       //Remove user from list
       this.visibleUsers.splice(i, 1);
     }
